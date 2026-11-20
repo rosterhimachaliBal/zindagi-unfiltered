@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zindagi Unfiltered | By Vishal</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f59e0b">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://meet.jit.si/external_api.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -42,6 +44,25 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
+    <!-- Choice Modal: Download App vs Continue in Browser -->
+    <div id="choice-modal" class="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 text-center border border-amber-500/40 shadow-2xl">
+            <div class="text-4xl mb-2">🔥</div>
+            <h2 class="text-2xl font-extrabold text-white">ZINDAGI <span class="text-amber-500">UNFILTERED</span></h2>
+            <p class="text-xs text-zinc-400 mt-1 mb-5">By Vishal • No Fake Sympathy, Only Reality</p>
+            
+            <div class="space-y-3">
+                <a href="Zindagi-Unfiltered.apk" download="Zindagi-Unfiltered.apk" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-zinc-950 font-extrabold py-3.5 rounded-2xl text-sm shadow-lg transition flex items-center justify-center gap-2">
+                    <span>📲 Download Android App (APK)</span>
+                </a>
+                <button onclick="closeChoiceModal()" class="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold py-3 rounded-2xl text-sm transition">
+                    🌐 Continue in Browser
+                </button>
+            </div>
+            <p class="text-[11px] text-zinc-500 mt-4">100% Free • Direct Live Audio Support Without Sharing Number</p>
+        </div>
+    </div>
+
     <!-- Top Navbar -->
     <header class="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/80 px-4 py-3">
         <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
@@ -53,11 +74,15 @@
                 </div>
             </div>
             
-            <!-- Live Status Badge -->
-            <button onclick="switchTab('live')" class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 transition">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
-                <span>Talk Live (No Number)</span>
-            </button>
+            <div class="flex items-center gap-2">
+                <a href="Zindagi-Unfiltered.apk" download="Zindagi-Unfiltered.apk" class="bg-amber-500/15 border border-amber-500/40 px-3 py-1.5 rounded-full text-xs font-bold text-amber-400 hover:bg-amber-500/25 transition">
+                    📲 Get APK
+                </a>
+                <button onclick="switchTab('live')" class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 transition">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+                    <span>Talk Live</span>
+                </button>
+            </div>
         </div>
 
         <!-- Navigation Tabs -->
@@ -269,7 +294,14 @@
     </footer>
 
     <script>
-        // Tab Switching Logic
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
+        function closeChoiceModal() {
+            document.getElementById('choice-modal').classList.add('hidden');
+        }
+
         function switchTab(tabName) {
             const sections = ['mood', 'respect', 'attitude', 'tracker', 'live'];
             sections.forEach(sec => {
@@ -284,7 +316,6 @@
             activeBtn.classList.add('tab-active');
         }
 
-        // Mood Data
         const moodData = {
             breakup: {
                 badge: "💔 ब्रेकअप & धोखा Reality Check",
@@ -337,7 +368,6 @@
             alert("Quote कॉपी हो गया भाई! अब इसे कहीं भी शेयर कर सकते हो।");
         }
 
-        // Streak Counter with LocalStorage
         let streak = parseInt(localStorage.getItem('zu_streak')) || 1;
         document.getElementById('streak-count').innerText = streak;
 
@@ -351,7 +381,6 @@
             document.getElementById('streak-count').innerText = streak;
         }
 
-        // Live WebRTC Room + Formspree Instant Email Notification
         let jitsiApi = null;
 
         async function startLiveSession() {
@@ -363,12 +392,10 @@
             btn.disabled = true;
             btn.innerText = "⏳ Connecting & Notifying Vishal...";
 
-            // Create Unique Room Name
             const randomId = Math.floor(100000 + Math.random() * 900000);
             const roomName = `ZindagiUnfiltered_Vishal_${randomId}`;
             const directJoinLink = `https://meet.jit.si/${roomName}#config.startWithVideoMuted=true`;
 
-            // Send Instant Alert to Vishal via Formspree
             try {
                 await fetch("https://formspree.io/f/mwlonevz", {
                     method: "POST",
@@ -385,7 +412,6 @@
                 console.log("Notification trigger attempted.");
             }
 
-            // Show Jitsi Live Room inside Webpage
             document.getElementById('live-setup-form').classList.add('hidden');
             document.getElementById('live-room-container').classList.remove('hidden');
 
