@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zindagi Unfiltered | By Vishal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://meet.jit.si/external_api.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(24, 24, 27, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
+        }
+        .tab-active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #09090b;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+        }
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navbar -->
+    <header class="sticky top-0 z-50 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/80 px-4 py-3">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🔥</span>
+                <div>
+                    <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-white">ZINDAGI <span class="text-amber-500">UNFILTERED</span></h1>
+                    <p class="text-[11px] text-zinc-400 -mt-1">By Vishal • No Fake Sympathy, Only Truth</p>
+                </div>
+            </div>
+            
+            <!-- Live Status Badge -->
+            <button onclick="switchTab('live')" class="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-full text-xs font-semibold text-emerald-400 hover:bg-emerald-500/20 transition">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span>
+                <span>Talk Live (No Number)</span>
+            </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="max-w-5xl mx-auto mt-3 flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <button onclick="switchTab('mood')" id="btn-mood" class="tab-active px-4 py-2 rounded-xl text-xs md:text-sm whitespace-nowrap transition">🧠 Reality Check</button>
+            <button onclick="switchTab('respect')" id="btn-respect" class="bg-zinc-900 text-zinc-300 hover:bg-zinc-800 px-4 py-2 rounded-xl text-xs md:text-sm whitespace-nowrap transition">👑 Self-Respect</button>
+            <button onclick="switchTab('attitude')" id="btn-attitude" class="bg-zinc-900 text-zinc-300 hover:bg-zinc-800 px-4 py-2 rounded-xl text-xs md:text-sm whitespace-nowrap transition">⚡ Mindset Shift</button>
+            <button onclick="switchTab('tracker')" id="btn-tracker" class="bg-zinc-900 text-zinc-300 hover:bg-zinc-800 px-4 py-2 rounded-xl text-xs md:text-sm whitespace-nowrap transition">📈 Comeback Streak</button>
+            <button onclick="switchTab('live')" id="btn-live" class="bg-zinc-900 text-amber-400 border border-amber-500/30 hover:bg-zinc-800 px-4 py-2 rounded-xl text-xs md:text-sm whitespace-nowrap transition">🎙️ Live Interaction</button>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto w-full px-4 py-6 flex-grow">
+
+        <!-- Hero Hook Banner -->
+        <div class="glass-card rounded-2xl p-5 md:p-7 mb-6 border-l-4 border-l-amber-500">
+            <p class="text-xs uppercase tracking-widest text-amber-500 font-bold mb-1">आज का कड़वा सच</p>
+            <h2 class="text-xl md:text-2xl font-bold text-white leading-snug">"दूसरों के पीछे भागना बंद कर... पहले जान कि तू किस लिए बना है।"</h2>
+            <p class="text-sm text-zinc-400 mt-2">जो इंसान तुम्हारी वफ़ादारी की कद्र नहीं कर सका, उसे तड़पाने का सबसे बड़ा हथियार तुम्हारी खामोशी और तुम्हारी कामयाबी है।</p>
+        </div>
+
+        <!-- TAB 1: MOOD & REALITY CHECK -->
+        <section id="tab-mood" class="space-y-6">
+            <h3 class="text-lg font-bold text-white">अभी तेरे दिमाग में क्या चल रहा है? (Select Mood)</h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button onclick="showMoodAdvice('breakup')" class="glass-card p-4 rounded-xl text-left hover:border-amber-500 focus:ring-2 ring-amber-500">
+                    <div class="text-2xl mb-2">💔</div>
+                    <div class="font-bold text-sm text-white">ब्रेकअप / धोखा</div>
+                    <div class="text-xs text-zinc-400 mt-1">दिल टूटा है या गुस्सा आ रहा है</div>
+                </button>
+                <button onclick="showMoodAdvice('overthinking')" class="glass-card p-4 rounded-xl text-left hover:border-amber-500 focus:ring-2 ring-amber-500">
+                    <div class="text-2xl mb-2">🌀</div>
+                    <div class="font-bold text-sm text-white">Overthinking</div>
+                    <div class="text-xs text-zinc-400 mt-1">दिमाग शांत नहीं हो रहा</div>
+                </button>
+                <button onclick="showMoodAdvice('alone')" class="glass-card p-4 rounded-xl text-left hover:border-amber-500 focus:ring-2 ring-amber-500">
+                    <div class="text-2xl mb-2">🌑</div>
+                    <div class="font-bold text-sm text-white">अकेलापन</div>
+                    <div class="text-xs text-zinc-400 mt-1">कोई समझने वाला नहीं है</div>
+                </button>
+                <button onclick="showMoodAdvice('career')" class="glass-card p-4 rounded-xl text-left hover:border-amber-500 focus:ring-2 ring-amber-500">
+                    <div class="text-2xl mb-2">🎯</div>
+                    <div class="font-bold text-sm text-white">Career & Goal</div>
+                    <div class="text-xs text-zinc-400 mt-1">लाइफ में फोकस चाहिए</div>
+                </button>
+            </div>
+
+            <!-- Dynamic Advice Output Box -->
+            <div id="mood-result" class="glass-card rounded-2xl p-6 border border-amber-500/30">
+                <div class="flex items-center justify-between mb-3">
+                    <span id="mood-badge" class="bg-amber-500/20 text-amber-400 text-xs font-bold px-3 py-1 rounded-full">💔 ब्रेकअप & धोखा Reality Check</span>
+                    <button onclick="copyQuote()" class="text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-3 py-1 rounded-lg transition">📋 Copy Quote</button>
+                </div>
+                <p id="mood-quote" class="text-lg font-semibold text-white mb-4">"उसने तुझे नहीं खोया, उसने एक ऐसे इंसान को खोया है जो उसके लिए सब कुछ करने को तैयार था। अब रोना बंद कर और गायब हो जा।"</p>
+                <div class="space-y-2 text-sm text-zinc-300" id="mood-steps">
+                    <p>✅ <strong>Step 1 (Radio Silence):</strong> आज से 100% Zero Contact। न कॉल, न मैसेज, न ब्लॉक्ड लिस्ट चेक करना।</p>
+                    <p>✅ <strong>Step 2 (No Revenge Drama):</strong> सस्ते स्टेटस डालकर जलाने की कोशिश मत कर—तेरी चुप्पी ही सबसे बड़ा तमाचा है।</p>
+                    <p>✅ <strong>Step 3 (Upgrade):</strong> अगले 90 दिन अपनी फिटनेस, स्किल्स और कमाई पर पागलों की तरह काम कर।</p>
+                </div>
+                <div class="mt-5 pt-4 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
+                    <span class="text-xs text-zinc-400">अभी भी मन भारी है? सीधा विशाल से लाइव बात कर:</span>
+                    <button onclick="switchTab('live')" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold text-xs px-4 py-2 rounded-xl transition">🎙️ Connect Live Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: SELF-RESPECT MASTERY -->
+        <section id="tab-respect" class="hidden space-y-5">
+            <h3 class="text-xl font-bold text-white">👑 Self-Respect: तेरी असली ताकत</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="glass-card p-5 rounded-2xl">
+                    <h4 class="text-amber-400 font-bold mb-2">1. Self-Respect क्या होती है?</h4>
+                    <p class="text-sm text-zinc-300 leading-relaxed">सेल्फ-रिस्पेक्ट का मतलब घमंड (Ego) नहीं है। इसका मतलब है—जहां तुम्हारी कद्र न हो, जहां तुम्हें बार-बार सफाई देनी पड़े या भीख मांगनी पड़े, वहां से बिना तमाशा किए चुपचाप उठकर चले जाना।</p>
+                </div>
+                <div class="glass-card p-5 rounded-2xl">
+                    <h4 class="text-amber-400 font-bold mb-2">2. इसे डूबने से कैसे बचाएं?</h4>
+                    <p class="text-sm text-zinc-300 leading-relaxed">जिसने एक बार तुम्हारा भरोसा तोड़ा, उसे दूसरा मौका देना अपनी सेल्फ-रिस्पेक्ट की हत्या करना है। "ना" कहना सीखो और किसी के लिए भी अपने नियम और नींद खराब मत करो।</p>
+                </div>
+                <div class="glass-card p-5 rounded-2xl md:col-span-2">
+                    <h4 class="text-amber-400 font-bold mb-3">3. High-Value इंसान कैसे बनें (ताकि लोग रिस्पेक्ट करने पर मजबूर हों):</h4>
+                    <ul class="grid md:grid-cols-2 gap-3 text-sm text-zinc-300">
+                        <li class="bg-zinc-900/80 p-3 rounded-xl">🔹 <strong>कम बोलो, ज़्यादा सुनो:</strong> हर बात पर रिएक्ट मत करो। शांत इंसान सबसे खतरनाक और आकर्षक होता है।</li>
+                        <li class="bg-zinc-900/80 p-3 rounded-xl">🔹 <strong>अपनी जुबान के पक्के रहो:</strong> जो खुद से वादा करो (वर्कआउट, काम, नो-कॉन्टैक्ट), उसे हर हाल में पूरा करो।</li>
+                        <li class="bg-zinc-900/80 p-3 rounded-xl">🔹 <strong>खुद पर पैसा और वक्त लगाओ:</strong> अच्छे कपड़े, फिट बॉडी और नई स्किल्स तुम्हारी पर्सनैलिटी को अलग लेवल पर ले जाती हैं।</li>
+                        <li class="bg-zinc-900/80 p-3 rounded-xl">🔹 <strong>हर समय उपलब्ध मत रहो:</strong> जब तुम हर किसी के लिए 24 घंटे फ्री रहते हो, तो तुम्हारी वैल्यू ज़ीरो हो जाती है।</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: POSITIVE VS NEGATIVE ATTITUDE -->
+        <section id="tab-attitude" class="hidden space-y-5">
+            <h3 class="text-xl font-bold text-white">⚡ Positive vs Negative Attitude</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="glass-card p-5 rounded-2xl border-t-4 border-t-rose-500">
+                    <h4 class="text-rose-400 font-bold text-base mb-3">❌ Negative Attitude (जो इंसान को खत्म करता है)</h4>
+                    <ul class="space-y-2.5 text-sm text-zinc-300">
+                        <li>• "मेरे साथ ही हमेशा बुरा क्यों होता है?" (Victim Mindset)</li>
+                        <li>• किसी के जाने के बाद बदला लेने या बर्बाद होने के बारे में सोचना।</li>
+                        <li>• अपने परिवार, काम और सेहत को किसी एक इंसान के लिए दांव पर लगाना।</li>
+                        <li>• हर समय पुरानी बातों और गलतियों को दोहराते रहना।</li>
+                    </ul>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border-t-4 border-t-emerald-500">
+                    <h4 class="text-emerald-400 font-bold text-base mb-3">✅ Positive Attitude (Vishal 2.0 Mindset)</h4>
+                    <ul class="space-y-2.5 text-sm text-zinc-300">
+                        <li>• "अच्छा हुआ समय रहते असली चेहरा सामने आ गया, मैं बच गया।"</li>
+                        <li>• अपने दर्द को अपनी कमाई, फिटनेस और स्किल्स बढ़ाने का ईंधन बनाना।</li>
+                        <li>• अपनी खुशियों का रिमोट कंट्रोल किसी दूसरे के हाथ में न देना।</li>
+                        <li>• जो मिला उसमें शुक्र करना, और जो चाहिए उसके लिए मेहनत करना।</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: COMEBACK TRACKER -->
+        <section id="tab-tracker" class="hidden space-y-5">
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <p class="text-xs uppercase tracking-widest text-amber-400 font-bold">No-Contact & Self-Mastery Streak</p>
+                <div class="text-5xl font-extrabold text-white my-3"><span id="streak-count">1</span> <span class="text-xl text-zinc-400 font-normal">Days</span></div>
+                <p class="text-xs text-zinc-400 mb-4">हर एक दिन जब तुम खुद पर कंट्रोल रखते हो, तुम पहले से ज़्यादा मज़बूत बनते हो।</p>
+                <div class="flex justify-center gap-3">
+                    <button onclick="updateStreak(1)" class="bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold px-5 py-2 rounded-xl text-sm transition">+1 Day Complete</button>
+                    <button onclick="updateStreak(0)" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-4 py-2 rounded-xl text-sm transition">Reset</button>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl">
+                <h4 class="font-bold text-white mb-3">📋 Daily Comeback Protocol (आज के नियम)</h4>
+                <div class="space-y-3 text-sm">
+                    <label class="flex items-center gap-3 bg-zinc-900/70 p-3 rounded-xl cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 accent-amber-500">
+                        <span>100% No Contact — न कोई मैसेज देखा, न प्रोफाइल चेक की</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-zinc-900/70 p-3 rounded-xl cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 accent-amber-500">
+                        <span>कमरे से बाहर निकलकर 30 मिनट वॉक / वर्कआउट किया</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-zinc-900/70 p-3 rounded-xl cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 accent-amber-500">
+                        <span>अपने करियर / नई स्किल पर कम से कम 1 घंटा काम किया</span>
+                    </label>
+                    <label class="flex items-center gap-3 bg-zinc-900/70 p-3 rounded-xl cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 accent-amber-500">
+                        <span>घरवालों से प्यार से बात की और अच्छा खाना खाया</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: LIVE WEB-BASED INTERACTION (NO PHONE NUMBER) -->
+        <section id="tab-live" class="hidden space-y-5">
+            <div class="glass-card p-6 rounded-2xl border border-amber-500/30">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">🎙️ Direct Live Audio & Chat Room</h3>
+                        <p class="text-xs text-zinc-400">बिना कोई नंबर या WhatsApp शेयर किए सीधे ब्राउज़र में विशाल से बात करें।</p>
+                    </div>
+                    <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full">🔒 100% Private & Encrypted</span>
+                </div>
+
+                <!-- Step 1 Form -->
+                <div id="live-setup-form" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">आपका नाम (या कोई भी Nickname)</label>
+                            <input type="text" id="user-nickname" placeholder="जैसे: Rahul या Anonymous" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-zinc-400 mb-1">किस टॉपिक पर बात करनी है?</label>
+                            <select id="user-topic" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option value="Breakup / Dhokha">💔 Breakup / धोखा मिला है</option>
+                                <option value="Overthinking / Stress">🌀 Overthinking / बहुत टेंशन है</option>
+                                <option value="Loneliness">🌑 अकेलापन लग रहा है</option>
+                                <option value="Career & Self-Respect">🎯 Career / Self-Respect Guidance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-zinc-400 mb-1">छोटा सा मैसेज (ताकि विशाल को पहले से पता हो)</label>
+                        <textarea id="user-note" rows="2" placeholder="अपनी बात संक्षेप में लिखें..." class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <button onclick="startLiveSession()" id="connect-btn" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-zinc-950 font-extrabold py-3.5 rounded-xl text-sm shadow-lg transition flex items-center justify-center gap-2">
+                        <span>🎙️ Start Live Room & Notify Vishal</span>
+                    </button>
+                    <p class="text-[11px] text-zinc-500 text-center">क्लिक करते ही विशाल को तुरंत ईमेल नोटिफिकेशन जाएगा और नीचे आपका प्राइवेट ऑडियो/चैट रूम खुल जाएगा।</p>
+                </div>
+
+                <!-- Step 2 Active Jitsi WebRTC Container -->
+                <div id="live-room-container" class="hidden mt-4 space-y-3">
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 p-3 rounded-xl flex flex-wrap items-center justify-between gap-2">
+                        <p class="text-xs text-emerald-300 font-medium">✅ विशाल को अलर्ट भेज दिया गया है! माइक की परमिशन दें और रूम में इंतज़ार करें।</p>
+                        <button onclick="endLiveSession()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">End Call</button>
+                    </div>
+                    <div id="jitsi-meet-area" class="w-full h-[450px] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 py-4 px-4 text-center text-xs text-zinc-500">
+        <p>Built with Purpose by <span class="text-amber-500 font-semibold">Vishal (Vishal 2.0)</span> • Your Peace Is Your Power</p>
+    </footer>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const sections = ['mood', 'respect', 'attitude', 'tracker', 'live'];
+            sections.forEach(sec => {
+                document.getElementById('tab-' + sec).classList.add('hidden');
+                const btn = document.getElementById('btn-' + sec);
+                btn.classList.remove('tab-active');
+                btn.classList.add('bg-zinc-900', 'text-zinc-300');
+            });
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabName);
+            activeBtn.classList.remove('bg-zinc-900', 'text-zinc-300');
+            activeBtn.classList.add('tab-active');
+        }
+
+        // Mood Data
+        const moodData = {
+            breakup: {
+                badge: "💔 ब्रेकअप & धोखा Reality Check",
+                quote: "उसने तुझे नहीं खोया, उसने एक ऐसे इंसान को खोया है जो उसके लिए सब कुछ करने को तैयार था। अब रोना बंद कर और गायब हो जा।",
+                steps: [
+                    "✅ <strong>Step 1 (Radio Silence):</strong> आज से 100% Zero Contact। न कॉल, न मैसेज, न ब्लॉक्ड लिस्ट चेक करना।",
+                    "✅ <strong>Step 2 (No Revenge Drama):</strong> सस्ते स्टेटस डालकर जलाने की कोशिश मत कर—तेरी चुप्पी ही सबसे बड़ा तमाचा है।",
+                    "✅ <strong>Step 3 (Upgrade):</strong> अगले 90 दिन अपनी फिटनेस, स्किल्स और कमाई पर पागलों की तरह काम कर।"
+                ]
+            },
+            overthinking: {
+                badge: "🌀 Overthinking कंट्रोल प्रोटोकॉल",
+                quote: "जो चीज़ तेरे कंट्रोल में नहीं है, उस पर सोचकर तू सिर्फ अपनी सेहत और अपना आज बर्बाद कर रहा है।",
+                steps: [
+                    "✅ <strong>Step 1 (5-Second Rule):</strong> जैसे ही पुराना ख्याल आए, तुरंत अपनी जगह से उठ जा और ठंडे पानी से मुंह धो।",
+                    "✅ <strong>Step 2 (Physical Exhaustion):</strong> 30 पुश-अप्स लगा या तेज़ वॉक पर निकल जा—जब शरीर थकेगा तो दिमाग शांत होगा।",
+                    "✅ <strong>Step 3 (Focus Shift):</strong> अपने लैपटॉप या काम पर बैठकर किसी नई स्किल में दिमाग लगा।"
+                ]
+            },
+            alone: {
+                badge: "🌑 अकेलापन = तेरी असली ताकत",
+                quote: "शेर हमेशा अकेला चलता है, भीड़ तो सिर्फ भेड़ों की होती है। यह वक्त तुझे खुद को तराशने के लिए मिला है।",
+                steps: [
+                    "✅ <strong>Step 1 (Reconnect):</strong> अपने पुराने असली दोस्तों और घरवालों से बात करना शुरू कर।",
+                    "✅ <strong>Step 2 (Solo Dates):</strong> अकेले बाइक राइड पर जा, अच्छा खाना खा, और खुद की कंपनी एन्जॉय कर।",
+                    "✅ <strong>Step 3 (Build Something):</strong> खाली समय में कोई नया प्रोजेक्ट, कोडिंग या फिटनेस गोल सेट कर।"
+                ]
+            },
+            career: {
+                badge: "🎯 Career & Paisa Focus",
+                quote: "इमोशन्स तेरा पेट नहीं भरेंगे। जब जेब में पैसा और हाथ में हुनर होता है, तो दुनिया झुककर सलाम करती है।",
+                steps: [
+                    "✅ <strong>Step 1 (Skill Mastery):</strong> रोज़ कम से कम 1 घंटा अपनी कोर स्किल को अपग्रेड करने में लगा।",
+                    "✅ <strong>Step 2 (Multiple Income):</strong> नौकरी के साथ-साथ फ्रीलांसिंग या साइड प्रोजेक्ट्स पर काम शुरू कर।",
+                    "✅ <strong>Step 3 (Financial Discipline):</strong> फालतू लोगों पर खर्च बंद कर, अपने भविष्य और परिवार के लिए सेविंग कर।"
+                ]
+            }
+        };
+
+        function showMoodAdvice(type) {
+            const data = moodData[type];
+            document.getElementById('mood-badge').innerText = data.badge;
+            document.getElementById('mood-quote').innerText = `"${data.quote}"`;
+            document.getElementById('mood-steps').innerHTML = data.steps.map(s => `<p>${s}</p>`).join('');
+        }
+
+        function copyQuote() {
+            const quote = document.getElementById('mood-quote').innerText;
+            navigator.clipboard.writeText(quote + " — Zindagi Unfiltered");
+            alert("Quote कॉपी हो गया भाई! अब इसे कहीं भी शेयर कर सकते हो।");
+        }
+
+        // Streak Counter with LocalStorage
+        let streak = parseInt(localStorage.getItem('zu_streak')) || 1;
+        document.getElementById('streak-count').innerText = streak;
+
+        function updateStreak(val) {
+            if (val === 0) {
+                streak = 0;
+            } else {
+                streak += val;
+            }
+            localStorage.setItem('zu_streak', streak);
+            document.getElementById('streak-count').innerText = streak;
+        }
+
+        // Live WebRTC Room + Formspree Instant Email Notification
+        let jitsiApi = null;
+
+        async function startLiveSession() {
+            const name = document.getElementById('user-nickname').value.trim() || 'Anonymous Dost';
+            const topic = document.getElementById('user-topic').value;
+            const note = document.getElementById('user-note').value.trim() || 'No additional note';
+            const btn = document.getElementById('connect-btn');
+
+            btn.disabled = true;
+            btn.innerText = "⏳ Connecting & Notifying Vishal...";
+
+            // Create Unique Room Name
+            const randomId = Math.floor(100000 + Math.random() * 900000);
+            const roomName = `ZindagiUnfiltered_Vishal_${randomId}`;
+            const directJoinLink = `https://meet.jit.si/${roomName}#config.startWithVideoMuted=true`;
+
+            // Send Instant Alert to Vishal via Formspree
+            try {
+                await fetch("https://formspree.io/f/mwlonevz", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                    body: JSON.stringify({
+                        Subject: `🔥 LIVE TALK REQUEST: ${name} (${topic})`,
+                        User_Name: name,
+                        Mood_Topic: topic,
+                        Message: note,
+                        Direct_Join_Link_For_Vishal: directJoinLink
+                    })
+                });
+            } catch (e) {
+                console.log("Notification trigger attempted.");
+            }
+
+            // Show Jitsi Live Room inside Webpage
+            document.getElementById('live-setup-form').classList.add('hidden');
+            document.getElementById('live-room-container').classList.remove('hidden');
+
+            const domain = 'meet.jit.si';
+            const options = {
+                roomName: roomName,
+                width: '100%',
+                height: 450,
+                parentNode: document.querySelector('#jitsi-meet-area'),
+                userInfo: { displayName: name },
+                configOverwrite: {
+                    startWithAudioMuted: false,
+                    startWithVideoMuted: true,
+                    prejoinPageEnabled: false
+                },
+                interfaceConfigOverwrite: {
+                    TOOLBAR_BUTTONS: ['microphone', 'chat', 'hangup', 'raisehand', 'tileview']
+                }
+            };
+            jitsiApi = new JitsiMeetExternalAPI(domain, options);
+        }
+
+        function endLiveSession() {
+            if (jitsiApi) {
+                jitsiApi.dispose();
+                jitsiApi = null;
+            }
+            document.getElementById('live-room-container').classList.add('hidden');
+            document.getElementById('live-setup-form').classList.remove('hidden');
+            const btn = document.getElementById('connect-btn');
+            btn.disabled = false;
+            btn.innerHTML = "<span>🎙️ Start Live Room & Notify Vishal</span>";
+        }
+    </script>
+</body>
+</html>

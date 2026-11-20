@@ -1,0 +1,17 @@
+{
+  "name": "Zindagi Unfiltered - By Vishal",
+  "short_name": "Zindagi Unfiltered",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/4289/4289742.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
